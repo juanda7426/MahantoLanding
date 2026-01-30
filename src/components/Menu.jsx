@@ -1,37 +1,19 @@
-import React from "react";
 import MenuCard from "./MenuCard";
 
-const Menu = ({
-  allCategories,
-  activeCategory,
-  setActiveCategory,
-  filteredProducts,
-  selectedProduct,
-  setSelectedProduct,
-  handleOrder,
-}) => {
+const Menu = ({ data, selectedProduct, setSelectedProduct, handleOrder }) => {
   return (
     <section id="menu" className="menu-section">
       <div className="container">
         <div className="section-title" data-aos="fade-up">
           <h2>Nuestro Menú</h2>
-          <p>Seleccionamos los mejores ingredientes para ti</p>
-        </div>
-
-        <div className="category-filter" data-aos="fade-up">
-          {allCategories.map((cat) => (
-            <button
-              key={cat}
-              className={`filter-btn ${activeCategory === cat ? "active" : ""}`}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
+          <p className="slogan">
+            Seleccionamos los mejores ingredientes para ti
+          </p>
+          <p className="category-title">HAMBURGUESAS</p>
         </div>
 
         <div className="menu-grid">
-          {filteredProducts.map((product) => (
+          {data.map((product) => (
             <MenuCard
               key={product.id}
               product={product}

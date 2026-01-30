@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
+import clasicaImg from "../src/assets/images/Clasic.jpeg";
+import americanaImg from "../src/assets/images/American.jpeg";
+import jaliscoImg from "../src/assets/images/Jalisco.jpeg";
+import quesoAsadoImg from "../src/assets/images/QuesoAsado.jpeg";
+import pulledPorkImg from "../src/assets/images/Pulled.jpeg";
+import hamburguesa3QImg from "../src/assets/images/3Q.jpeg";
+import costraImg from "../src/assets/images/Costra.jpeg";
 import "aos/dist/aos.css";
-import menuData from "./data/menu.json";
 import "./App.css";
 
 // Components
@@ -11,30 +17,20 @@ import Menu from "./components/Menu";
 import Info from "./components/Info";
 import Footer from "./components/Footer";
 import QRModal from "./components/QRModal";
+import { heroImages, menuData } from "./data/menu";
 
 const App = () => {
   // States
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [parallaxOffset, setParallaxOffset] = useState({ x: 0, y: 0 });
   const [scrolled, setScrolled] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("Todos");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Constants
   const whatsappNumber = "573207643590";
-  const heroImages = [
-    "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-  ];
-  const allCategories = ["Todos", ...menuData.map((cat) => cat.category)];
-  const filteredProducts =
-    activeCategory === "Todos"
-      ? menuData.flatMap((cat) => cat.items)
-      : menuData.find((cat) => cat.category === activeCategory)?.items || [];
 
+  //*********************** */
   // Effects
   useEffect(() => {
     AOS.init({ duration: 1000, once: true, offset: 100 });
@@ -64,7 +60,7 @@ const App = () => {
 
   useEffect(() => {
     AOS.refresh();
-  }, [selectedProduct, activeCategory]);
+  }, [selectedProduct]);
 
   // Handlers
   const handleOrder = (productName) => {
@@ -74,6 +70,7 @@ const App = () => {
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
   };
 
+  //*********************** */
   return (
     <div className="app-wrapper">
       <Navbar scrolled={scrolled} />
@@ -86,10 +83,7 @@ const App = () => {
       />
 
       <Menu
-        allCategories={allCategories}
-        activeCategory={activeCategory}
-        setActiveCategory={setActiveCategory}
-        filteredProducts={filteredProducts}
+        data={menuData}
         selectedProduct={selectedProduct}
         setSelectedProduct={setSelectedProduct}
         handleOrder={handleOrder}
