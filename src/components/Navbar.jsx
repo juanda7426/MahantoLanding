@@ -1,12 +1,15 @@
-import React from "react";
-
+import logo from "../assets/images/Logo.jpeg";
 const Navbar = ({ scrolled }) => {
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="container">
-        <a href="#" className="logo">
-          Don<span>Juan</span>
-        </a>
+        <div className="navbar-logo">
+          <a href="#" className="logo-text">
+            <img src={logo} alt="Ma'Anto Logo" />
+            MA'ANTO
+          </a>
+        </div>
+
         <ul className="nav-links">
           <li>
             <a href="#menu">Menú</a>

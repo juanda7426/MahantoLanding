@@ -1,10 +1,7 @@
-import React from "react";
-
-const Info = () => {
-  const address = "Calle Falsa 123, Barrio Gourmet";
-  const googleMapsUrl =
-    "https://www.google.com/maps/dir/?api=1&destination=4.6728,-74.0541"; // Example coords
-  const wazeUrl = "https://waze.com/ul?ll=4.6728,-74.0541&navigate=yes";
+const Info = ({ info }) => {
+  const address = info.address;
+  const googleMapsUrl = info.mapsGoogle;
+  const wazeUrl = info.mapsWaze;
 
   return (
     <section id="contacto" className="info-section">
@@ -40,13 +37,10 @@ const Info = () => {
             </h3>
             <ul className="hours-list">
               <li>
-                <span>Lunes - Jueves:</span> 12:00 PM - 10:00 PM
+                <span>Lunes:</span> Cerrado
               </li>
               <li>
-                <span>Viernes - Sábado:</span> 12:00 PM - 11:30 PM
-              </li>
-              <li>
-                <span>Domingos:</span> 12:00 PM - 9:00 PM
+                <span>Martes - Domingos:</span> 17:00 PM - 22:00 PM
               </li>
             </ul>
           </div>
@@ -55,13 +49,17 @@ const Info = () => {
               <i className="fas fa-share-alt"></i> Síguenos
             </h3>
             <div className="social-links">
-              <a href="#">
+              <a
+                href={info.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="#">
+              <a href={info.facebook} target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-facebook"></i>
               </a>
-              <a href="#">
+              <a href={info.tiktok} target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-tiktok"></i>
               </a>
             </div>

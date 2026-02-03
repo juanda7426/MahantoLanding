@@ -1,6 +1,6 @@
 import MenuCard from "./MenuCard";
 
-const Menu = ({ data, selectedProduct, setSelectedProduct, handleOrder }) => {
+const Menu = ({ data, selectedProduct, setSelectedProduct, addToCart }) => {
   return (
     <section id="menu" className="menu-section">
       <div className="container">
@@ -19,7 +19,7 @@ const Menu = ({ data, selectedProduct, setSelectedProduct, handleOrder }) => {
               product={product}
               isFlipped={selectedProduct?.id === product.id}
               onFlip={setSelectedProduct}
-              onOrder={handleOrder}
+              onAddToCart={addToCart}
             />
           ))}
         </div>

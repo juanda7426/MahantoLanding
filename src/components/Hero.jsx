@@ -1,6 +1,4 @@
-import React from "react";
-
-const Hero = ({ heroImages, currentSlide, setIsModalOpen, whatsappNumber }) => {
+const Hero = ({ heroImages, currentSlide }) => {
   return (
     <header className="hero">
       <div className="hero-carousel">
@@ -33,25 +31,9 @@ const Hero = ({ heroImages, currentSlide, setIsModalOpen, whatsappNumber }) => {
         <div className="hero-info" data-aos="fade-up">
           <h1>
             Hamburguesas <br />
-            <span className="highlight">Don Juan</span>
+            <span className="highlight">Ma'Anto</span>
           </h1>
           <p className="slogan">Artesanía, sabor y pasión en cada bocado.</p>
-          <div className="cta-buttons">
-            <a
-              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola 👋, vengo desde la página web.")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              ¡Ordena el Sabor!
-            </a>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="btn btn-secondary"
-            >
-              Nuestro QR
-            </button>
-          </div>
         </div>
       </div>
     </header>

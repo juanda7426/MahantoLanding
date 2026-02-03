@@ -1,12 +1,10 @@
-import React from "react";
-
 const Footer = ({ whatsappNumber }) => {
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
           <p>
-            &copy; 2026 Hamburguesas Don Juan. Todos los derechos reservados.
+            &copy; 2026 Hamburguesas Ma'Anto. Todos los derechos reservados.
           </p>
         </div>
       </div>

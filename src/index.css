@@ -1,5 +1,5 @@
 :root {
-  --primary: #ff4d00;
+  --primary: rgb(226, 4, 17);
   --secondary: #ffb800;
   --accent: #d62828;
   --dark: #1a1a1a;
@@ -8,6 +8,7 @@
   --gray: #6c757d;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --shadow-red: rgba(255, 0, 0, 0.5);
 }
 
 * {

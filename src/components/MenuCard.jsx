@@ -1,6 +1,6 @@
 import React from "react";
 
-const MenuCard = ({ product, isFlipped, onFlip, onOrder }) => {
+const MenuCard = ({ product, isFlipped, onFlip, onAddToCart }) => {
   const [imgError, setImgError] = React.useState(false);
 
   return (
@@ -22,7 +22,7 @@ const MenuCard = ({ product, isFlipped, onFlip, onOrder }) => {
               ) : (
                 <div className="image-placeholder">
                   <i className="fas fa-hamburger"></i>
-                  <span>Sabor Don Juan</span>
+                  <span>Sabor Ma'Anto</span>
                 </div>
               )}
               {product.badge && <span className="badge">{product.badge}</span>}
@@ -34,10 +34,10 @@ const MenuCard = ({ product, isFlipped, onFlip, onOrder }) => {
               <div className="card-footer-front">
                 <span className="price-front">{product.price}</span>
                 <button
-                  onClick={() => onOrder(product.name)}
-                  className="btn-order-whatsapp"
+                  onClick={() => onAddToCart(product)}
+                  className="btn-add-cart"
                 >
-                  <i className="fab fa-whatsapp"></i> Pedir
+                  <i className="fas fa-cart-plus"></i> Agregar
                 </button>
               </div>
             </div>
@@ -60,15 +60,18 @@ const MenuCard = ({ product, isFlipped, onFlip, onOrder }) => {
             <div className="back-price-tag">{product.price}</div>
             <div className="back-actions">
               <button
-                onClick={() => onOrder(product.name)}
-                className="btn-order-whatsapp"
+                onClick={() => {
+                  onAddToCart(product);
+                  onFlip(null);
+                }}
+                className="btn-add-cart"
                 style={{
                   width: "100%",
                   justifyContent: "center",
                   padding: "15px",
                 }}
               >
-                <i className="fab fa-whatsapp"></i> Ordenar ahora
+                <i className="fas fa-cart-plus"></i> Agregar al carrito
               </button>
             </div>
           </div>

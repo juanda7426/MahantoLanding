@@ -1,4 +1,3 @@
-// src/data/menu.js
 import clasicaImg from "../assets/images/Clasic.jpeg";
 import americanaImg from "../assets/images/American.jpeg";
 import jaliscoImg from "../assets/images/Jalisco.jpeg";
@@ -99,6 +98,10 @@ export const menuData = [
          y queso crema de queso azul`,
     image: costraImg,
     badge: null,
+    options: {
+      title: "Elije tu carne desmechada",
+      choices: ["Pulled Pork", "Tipo Birria"],
+    },
   },
 ];
 
@@ -110,27 +113,37 @@ export const adicionesData = [
   },
   {
     id: 2,
-    name: "Pulled pork o tipo birria",
+    name: "Adición Pulled Pork",
     price: "$5 K",
   },
   {
     id: 3,
+    name: "Adición Tipo Birria",
+    price: "$5 K",
+  },
+  {
+    id: 4,
     name: "Tocineta",
     price: "$4 K",
   },
   {
-    id: 4,
+    id: 5,
     name: "Queso cheddar",
     price: "$1 K",
   },
   {
-    id: 5,
-    name: "Carne hamburguesa",
+    id: 6,
+    name: "Carne hamburguesa (150g)",
     price: "$5 K",
   },
   {
-    id: 6,
-    name: "Coca-Cola Original o Zero",
+    id: 7,
+    name: "Coca-Cola Original",
+    price: "$5 K",
+  },
+  {
+    id: 8,
+    name: "Coca-Cola Zero",
     price: "$5 K",
   },
 ];
@@ -144,3 +157,25 @@ export const heroImages = [
   hamburguesa3QImg,
   costraImg,
 ];
+
+export const salsasOptions = [
+  "Todo",
+  "Sin salsas",
+  "Salsa de tomate",
+  "Salsa de la casa",
+  "BBQ",
+  "Mostaza",
+];
+
+export const info = {
+  name: "Ma'Anto",
+  address: "Cra. 54 # 80-23, Villa Central, Itagüi, Antioquia",
+  mapsGoogle:
+    "https://www.google.com/maps/place/Cra.+54+%23+80-23,+Villa+Central,+Itag%C3%BCi,+Antioquia/@6.1903725,-75.596456,15z/data=!4m10!1m2!2m1!1sCra+54%2380-23!3m6!1s0x8e46826b24e0a20d:0xeb09ba500cab49c9!8m2!3d6.190431!4d-75.596603!15sCgxDcmEgNTQjODAtMjOSAQpzdWJwcmVtaXNl4AEA!16s%2Fg%2F11x7gwg0bx?hl=es&entry=ttu&g_ep=EgoyMDI2MDEyOC4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D",
+  mapsWaze:
+    "https://ul.waze.com/ul?place=ChIJDaLgJGuCRo4RyUmrDFC6Ces&ll=6.19043100%2C-75.59660300&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+  instagram: "https://www.instagram.com/algustodemaanto/",
+  facebook: "https://www.facebook.com/bryan.alexis.garcia.839367",
+  tiktok: "https://www.tiktok.com/@algustodemaanto",
+  phone: "573207643590",
+};
