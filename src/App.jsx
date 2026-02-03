@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AOS from "aos";
+import Swal from "sweetalert2";
 import "aos/dist/aos.css";
 import "./App.css";
 
@@ -61,6 +62,7 @@ const App = () => {
   const confirmCustomization = (product, customizations) => {
     setCart((prevCart) => {
       const customizationKey = JSON.stringify({
+        productId: product.id,
         adiciones: customizations.adiciones.map((a) => a.id).sort(),
         salsas: customizations.salsas.sort(),
         observaciones: customizations.observaciones,
@@ -68,13 +70,12 @@ const App = () => {
       });
 
       const existingItem = prevCart.find(
-        (item) =>
-          item.id === product.id && item.customizationKey === customizationKey,
+        (item) => item.customizationKey === customizationKey,
       );
 
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === product.id && item.customizationKey === customizationKey
+          item.customizationKey === customizationKey
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
@@ -113,10 +114,10 @@ const App = () => {
   const sendOrderToWhatsApp = (deliveryData) => {
     if (cart.length === 0) return;
 
-    let message = "🍔 *NUEVO PEDIDO - MA'ANTO*\n";
+    let message = "*NUEVO PEDIDO - MA'ANTO*\n";
     message += "--------------------------------\n\n";
 
-    message += "👤 *DATOS DE ENTREGA*\n";
+    message += "*DATOS DE ENTREGA*\n";
     message += `• *Nombre:* ${deliveryData.nombre}\n`;
     message += `• *Teléfono:* ${deliveryData.telefono}\n`;
     message += `• *Dirección:* ${deliveryData.direccion}\n`;
@@ -124,7 +125,7 @@ const App = () => {
     message += `• *Apto/Piso:* ${deliveryData.apto}\n`;
     message += `• *Pago:* ${deliveryData.pago}\n\n`;
 
-    message += "🛒 *DETALLE DEL PEDIDO*\n";
+    message += "*DETALLE DEL PEDIDO*\n";
     let total = 0;
 
     cart.forEach((item) => {
@@ -155,7 +156,7 @@ const App = () => {
     });
 
     message += "--------------------------------\n";
-    message += `💰 *TOTAL A PAGAR: $${(total / 1000).toLocaleString()} K*`;
+    message += `*TOTAL A PAGAR: $${(total / 1000).toLocaleString()} K*`;
     message += "\n--------------------------------\n";
     message += "\n_Pedido generado desde la web_";
 
@@ -163,6 +164,13 @@ const App = () => {
       `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
       "_blank",
     );
+
+    Swal.fire({
+      title: "¡Pedido Enviado!",
+      text: "Tu pedido ha sido enviado a WhatsApp. Por favor, estar pendiente del chat.",
+      icon: "success",
+      confirmButtonColor: "var(--primary)",
+    });
 
     setCart([]);
     setIsCheckoutOpen(false);
@@ -172,7 +180,11 @@ const App = () => {
   //********************* */
   return (
     <div className="app-wrapper">
-      <Navbar scrolled={scrolled} />
+      <Navbar
+        scrolled={scrolled}
+        cartCount={cart.reduce((a, b) => a + b.quantity, 0)}
+        onOpenCart={() => setIsCartOpen(true)}
+      />
 
       <Hero heroImages={heroImages} currentSlide={currentSlide} />
 
@@ -186,18 +198,6 @@ const App = () => {
       <Info info={info} />
 
       <Footer whatsappNumber={whatsappNumber} />
-
-      {cart.length > 0 && (
-        <button className="cart-float" onClick={() => setIsCartOpen(true)}>
-          <i className="fas fa-shopping-cart"></i>
-          <span
-            key={cart.reduce((a, b) => a + b.quantity, 0)}
-            className="cart-count"
-          >
-            {cart.reduce((a, b) => a + b.quantity, 0)}
-          </span>
-        </button>
-      )}
 
       <CartModal
         cart={cart}
@@ -224,6 +224,15 @@ const App = () => {
         onClose={() => setIsCheckoutOpen(false)}
         onConfirm={sendOrderToWhatsApp}
       />
+
+      {scrolled && (
+        <button
+          className="scroll-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <i className="fas fa-chevron-up"></i>
+        </button>
+      )}
     </div>
   );
 };

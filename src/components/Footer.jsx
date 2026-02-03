@@ -1,15 +1,17 @@
 const Footer = ({ whatsappNumber }) => {
+  const message =
+    "Hola MA'ANTO, vengo de la página web y me gustaría hacer un pedido";
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
           <p>
-            &copy; 2026 Hamburguesas Ma'Anto. Todos los derechos reservados.
+            &copy; 2026 Hamburguesas MA'ANTO. Todos los derechos reservados.
           </p>
         </div>
       </div>
       <a
-        href={`https://wa.me/${whatsappNumber}`}
+        href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`}
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"

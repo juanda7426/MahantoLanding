@@ -1,14 +1,15 @@
 :root {
-  --primary: rgb(226, 4, 17);
-  --secondary: #ffb800;
-  --accent: #d62828;
-  --dark: #1a1a1a;
-  --light: #f8f9fa;
+  --primary: #ff4d00; /* Vibrant Orange-Red (Matches the "Rojo Anaranjado" of the logo) */
+  --secondary: #fabe12; /* Bright Warm Gold */
+  --accent: #d62828; /* Deep Red for contrast and hover states */
+  --dark: #0f0f0f; /* Ultimate Dark mode black */
+  --light: #fdfaf5; /* Warm off-white background */
   --white: #ffffff;
-  --gray: #6c757d;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  --shadow-red: rgba(255, 0, 0, 0.5);
+  --gray: #888888;
+  --cream: #fff8e1; /* Lighter cream for better readability */
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  --shadow-primary: rgba(255, 77, 0, 0.4);
 }
 
 * {
@@ -34,11 +35,12 @@ h2,
 h3,
 .logo {
   font-family: "Montserrat", sans-serif;
-  font-weight: 800;
+  font-weight: 900;
+  letter-spacing: -0.02em;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
 }

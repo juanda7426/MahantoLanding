@@ -3,6 +3,7 @@ const Info = ({ info }) => {
   const googleMapsUrl = info.mapsGoogle;
   const wazeUrl = info.mapsWaze;
 
+  //********************* */
   return (
     <section id="contacto" className="info-section">
       <div className="container">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const CheckoutModal = ({ isOpen, onClose, onConfirm }) => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const CheckoutModal = ({ isOpen, onClose, onConfirm }) => {
 
   if (!isOpen) return null;
 
+  //********************* */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -27,12 +29,27 @@ const CheckoutModal = ({ isOpen, onClose, onConfirm }) => {
       !formData.apto ||
       !formData.pago
     ) {
-      alert("Por favor completa los campos obligatorios");
+      Swal.fire({
+        title: "Campos incompletos",
+        text: "Por favor completa todos los campos obligatorios para la entrega.",
+        icon: "error",
+        confirmButtonColor: "var(--primary)",
+      });
       return;
     }
     onConfirm(formData);
+    setFormData({
+      nombre: "",
+      telefono: "",
+      direccion: "",
+      unidad: "",
+      apto: "",
+      pago: "Efectivo",
+      observaciones: "",
+    });
   };
 
+  //********************* */
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
@@ -41,9 +58,6 @@ const CheckoutModal = ({ isOpen, onClose, onConfirm }) => {
       >
         <div className="custom-modal-header">
           <h3>Datos de Entrega</h3>
-          <button className="close-btn" onClick={onClose}>
-            &times;
-          </button>
         </div>
 
         <form onSubmit={handleSubmit} className="checkout-form">
@@ -117,10 +131,14 @@ const CheckoutModal = ({ isOpen, onClose, onConfirm }) => {
                 required
               />
             </div>
+          </div>
+
+          <div className="form-row-txt ">
             <div className="form-group">
               <label>Observaciones</label>
               <textarea
                 name="observaciones"
+                rows={3}
                 value={formData.observaciones}
                 onChange={handleChange}
                 placeholder="Ej: Entrega en la portería"

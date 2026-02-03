@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 import { salsasOptions } from "../data/menu";
 
 const CustomizationModal = ({
@@ -44,7 +45,12 @@ const CustomizationModal = ({
 
   const handleConfirm = () => {
     if (product.options && !productOption) {
-      alert(`Por favor elige una opción de: ${product.options.title}`);
+      Swal.fire({
+        title: "¡Atención!",
+        text: `Por favor elige una opción de: ${product.options.title}`,
+        icon: "warning",
+        confirmButtonColor: "var(--primary)",
+      });
       return;
     }
 
@@ -74,9 +80,6 @@ const CustomizationModal = ({
             <h3>{product.name}</h3>
             <p className="product-base-desc">{product.description}</p>
           </div>
-          <button className="close-btn" onClick={onClose}>
-            &times;
-          </button>
         </div>
 
         <div className="custom-modal-body">
