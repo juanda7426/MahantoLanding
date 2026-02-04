@@ -120,47 +120,61 @@ const CustomizationModal = ({
             </div>
           )}
 
-          <div className="custom-section">
-            <h4>Adiciones</h4>
-            <div className="options-grid">
-              {adiciones.map((ad) => (
-                <label
-                  key={ad.id}
-                  className={`option-card ${selectedAdiciones.find((a) => a.id === ad.id) ? "active" : ""}`}
-                >
-                  <input
-                    type="checkbox"
-                    onChange={() => handleToggleAdicion(ad)}
-                    checked={!!selectedAdiciones.find((a) => a.id === ad.id)}
-                  />
-                  <div className="option-info">
-                    <span className="option-name">{ad.name}</span>
-                    <span className="option-price">+{ad.price}</span>
-                  </div>
-                </label>
-              ))}
-            </div>
-          </div>
+          {product.category === "hamburguesas" && (
+            <>
+              <div className="custom-section">
+                <h4>Adiciones</h4>
+                <div className="options-grid">
+                  {adiciones.map((ad) => (
+                    <label
+                      key={ad.id}
+                      className={`option-card ${selectedAdiciones.find((a) => a.id === ad.id) ? "active" : ""}`}
+                    >
+                      <input
+                        type="checkbox"
+                        onChange={() => handleToggleAdicion(ad)}
+                        checked={
+                          !!selectedAdiciones.find((a) => a.id === ad.id)
+                        }
+                      />
+                      <div className="option-info">
+                        <span className="option-name">{ad.name}</span>
+                        <span className="option-price">+{ad.price}</span>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="custom-section">
+                <h4>Salsas / Vegetales</h4>
+                <div className="tags-container">
+                  {salsasOptions.map((s) => (
+                    <button
+                      key={s}
+                      className={`tag-btn ${selectedSalsas.includes(s) ? "active" : ""}`}
+                      onClick={() => handleToggleSalsa(s)}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="custom-section">
-            <h4>Salsas / Vegetales</h4>
-            <div className="tags-container">
-              {salsasOptions.map((s) => (
-                <button
-                  key={s}
-                  className={`tag-btn ${selectedSalsas.includes(s) ? "active" : ""}`}
-                  onClick={() => handleToggleSalsa(s)}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="custom-section">
-            <h4>Observaciones especiales</h4>
+            <h4>
+              {product.category === "bebidas"
+                ? "Notas"
+                : "Observaciones especiales"}
+            </h4>
             <textarea
-              placeholder="Ej: Término de la carne, sin algún ingrediente específico..."
+              placeholder={
+                product.category === "bebidas"
+                  ? "Ej: Muy fría, con pitillo..."
+                  : "Ej: Término de la carne, sin algún ingrediente específico..."
+              }
               value={observaciones}
               onChange={(e) => setObservaciones(e.target.value)}
             />

@@ -21,7 +21,9 @@ const MenuCard = ({ product, isFlipped, onFlip, onAddToCart }) => {
                 />
               ) : (
                 <div className="image-placeholder">
-                  <i className="fas fa-hamburger"></i>
+                  <i
+                    className={`fas ${product.category === "bebidas" ? "fa-glass-cheers" : "fa-hamburger"}`}
+                  ></i>
                   <span>Sabor Ma'Anto</span>
                 </div>
               )}
@@ -33,12 +35,18 @@ const MenuCard = ({ product, isFlipped, onFlip, onAddToCart }) => {
               </div>
               <div className="card-footer-front">
                 <span className="price-front">{product.price}</span>
-                <button
-                  onClick={() => onAddToCart(product)}
-                  className="btn-add-cart"
-                >
-                  <i className="fas fa-cart-plus"></i> Agregar
-                </button>
+                {product.category !== "adiciones" ? (
+                  <button
+                    onClick={() => onAddToCart(product)}
+                    className="btn-add-cart"
+                  >
+                    <i className="fas fa-cart-plus"></i> Agregar
+                  </button>
+                ) : (
+                  <span className="info-badge">
+                    <i className="fas fa-sticky-note"></i> Nota: Adicional
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -58,21 +66,31 @@ const MenuCard = ({ product, isFlipped, onFlip, onAddToCart }) => {
             </div>
             <p className="back-description">{product.description}</p>
             <div className="back-price-tag">{product.price}</div>
-            <div className="back-actions">
-              <button
-                onClick={() => {
-                  onAddToCart(product);
-                  onFlip(null);
-                }}
-                className="btn-add-cart"
-                style={{
-                  width: "100%",
-                  justifyContent: "center",
-                  padding: "15px",
-                }}
-              >
-                <i className="fas fa-cart-plus"></i> Agregar al carrito
-              </button>
+            <div className="back-actions" style={{ width: "100%" }}>
+              {product.category !== "adiciones" ? (
+                <button
+                  onClick={() => {
+                    onAddToCart(product);
+                    onFlip(null);
+                  }}
+                  className="btn-add-cart"
+                  style={{
+                    width: "100%",
+                    justifyContent: "center",
+                    padding: "15px",
+                  }}
+                >
+                  <i className="fas fa-cart-plus"></i> Agregar al carrito
+                </button>
+              ) : (
+                <div
+                  className="info-badge highlight-note"
+                  style={{ width: "100%", padding: "12px" }}
+                >
+                  <i className="fas fa-info-circle"></i>
+                  Disponible como extra al armar tu hamburguesa.
+                </div>
+              )}
             </div>
           </div>
         </div>

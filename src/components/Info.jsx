@@ -38,10 +38,13 @@ const Info = ({ info }) => {
             </h3>
             <ul className="hours-list">
               <li>
-                <span>Lunes:</span> Cerrado
+                <span>{info.closed}</span> Cerrado
               </li>
               <li>
-                <span>Martes - Domingo:</span> 17:00 PM - 22:00 PM
+                <span>{info.day1}</span> {info.hours1}
+              </li>
+              <li>
+                <span>{info.day2}</span> {info.hours2}
               </li>
             </ul>
           </div>

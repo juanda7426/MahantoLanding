@@ -5,6 +5,15 @@ import quesoAsadoImg from "../assets/images/QuesoAsado.jpeg";
 import pulledPorkImg from "../assets/images/Pulled.jpeg";
 import hamburguesa3QImg from "../assets/images/3Q.jpeg";
 import costraImg from "../assets/images/Costra.jpeg";
+import coca0Img from "../assets/images/CocaCero.jpeg";
+import cocaImg from "../assets/images/CocaOrg.jpeg";
+import addPapasImg from "../assets/images/AddPapas.jpeg";
+import birriaImg from "../assets/images/Birria.jpeg";
+import addPulledImg from "../assets/images/AddPulled.jpeg";
+import addTocinetaImg from "../assets/images/Tocineta.jpeg";
+import addCheddarImg from "../assets/images/Cheddar.jpeg";
+import addHamburguesaImg from "../assets/images/Carne.jpeg";
+import letreroImg from "../assets/images/Letrero.jpeg";
 
 export const menuData = [
   {
@@ -27,7 +36,7 @@ export const menuData = [
     id: 3,
     name: "Hamburguesa Jalisco",
     price: "$20 K",
-    description: `Pan artesanal, 150g de corte 100% res, carne de res desmechada tipo birria, pico de gallo, mermelada de jalapeños y queso crema de queso azul.`,
+    description: `Pan artesanal, 150g de corte 100% res, carne de res desmechada tipo birria, pico de gallo, salsa chipotle y queso crema de queso azul.`,
     image: jaliscoImg,
     badge: null,
   },
@@ -35,7 +44,7 @@ export const menuData = [
     id: 4,
     name: "Hamburguesa con Queso Asado",
     price: "$22 K",
-    description: `Pan artesanal, 150g de corte 100% res, queso asado, tocineta premium, BBQ dulce, mermelada de jalapeños y queso crema de queso azul.`,
+    description: `Pan artesanal, 150g de corte 100% res, queso asado, tocineta premium, BBQ dulce, salsa chipotle y queso crema de queso azul.`,
     image: quesoAsadoImg,
     badge: null,
   },
@@ -51,7 +60,7 @@ export const menuData = [
     id: 6,
     name: "Hamburguesa 3Q",
     price: "$22 K",
-    description: `Pan artesanal, 150g de corte 100% res, doble queso cheddar, tocineta premium encostrada con queso mozzarella, mermelada de jalapeños y queso crema de queso azul.`,
+    description: `Pan artesanal, 150g de corte 100% res, doble queso cheddar, tocineta premium encostrada con queso mozzarella, salsa chipotle y queso crema de queso azul.`,
     image: hamburguesa3QImg,
     badge: null,
   },
@@ -66,53 +75,98 @@ export const menuData = [
       title: "Elige tu carne desmechada",
       choices: ["Pulled Pork", "Tipo Birria"],
     },
+    category: "hamburguesas",
+  },
+  {
+    id: 8,
+    name: "Papas Ma'Anto",
+    price: "$21 K",
+    description: `Papas a la francesa acompañadas de pulled pork, tocineta premium, pico de gallo, queso crema, queso cheddar y salsas de la casa.`,
+    image: addPapasImg,
+    badge: null,
+    category: "hamburguesas",
   },
 ];
 
 export const adicionesData = [
   {
-    id: 1,
+    id: 101,
     name: "Papas a la francesa",
     price: "$5 K",
+    description: "Porción de papas crujientes con sal.",
+    image: addPapasImg,
+    category: "adiciones",
   },
   {
-    id: 2,
+    id: 102,
     name: "Adición Pulled Pork",
     price: "$5 K",
+    description: "Porción extra de nuestro cerdo mechado BBQ.",
+    image: addPulledImg,
+    category: "adiciones",
   },
   {
-    id: 3,
+    id: 103,
     name: "Adición Tipo Birria",
     price: "$5 K",
+    description: "Porción extra de nuestra carne desmechada tipo birria.",
+    image: birriaImg,
+    category: "adiciones",
   },
   {
-    id: 4,
-    name: "Tocineta",
+    id: 104,
+    name: "Tocineta premium",
     price: "$4 K",
+    description: "Porción de tocineta premium.",
+    image: addTocinetaImg,
+    category: "adiciones",
   },
   {
-    id: 5,
+    id: 105,
     name: "Queso cheddar",
     price: "$1 K",
+    description: "Porción de queso cheddar fundido.",
+    image: addCheddarImg,
+    category: "adiciones",
   },
   {
-    id: 6,
+    id: 106,
     name: "Carne hamburguesa (150g)",
     price: "$5 K",
-  },
-  {
-    id: 7,
-    name: "Coca-Cola Original",
-    price: "$5 K",
-  },
-  {
-    id: 8,
-    name: "Coca-Cola Zero",
-    price: "$5 K",
+    description: "Porción de carne de res 100% (150g).",
+    image: addHamburguesaImg,
+    category: "adiciones",
   },
 ];
 
+export const bebidasData = [
+  {
+    id: 201,
+    name: "Coca-Cola Original",
+    price: "$5 K",
+    description: "Refrescante sabor original.",
+    image: cocaImg,
+    category: "bebidas",
+  },
+  {
+    id: 202,
+    name: "Coca-Cola Zero",
+    price: "$5 K",
+    description: "El sabor de siempre sin azúcar.",
+    image: coca0Img,
+    category: "bebidas",
+  },
+];
+
+// Combine all for the full menu
+export const allMenuData = [
+  ...menuData.map((item) => ({ ...item, category: "hamburguesas" })),
+  ...adicionesData,
+  ...bebidasData,
+];
+
 export const heroImages = [
+  letreroImg,
   clasicaImg,
   americanaImg,
   jaliscoImg,
@@ -142,4 +196,9 @@ export const info = {
   facebook: "https://www.facebook.com/bryan.alexis.garcia.839367",
   tiktok: "https://www.tiktok.com/@algustodemaanto",
   phone: "573207643590",
+  closed: "Lunes",
+  day1: "Domingo a Jueves",
+  day2: "Viernes y Sábado",
+  hours1: "05:00 PM - 10:00 PM",
+  hours2: "05:00 PM - 11:00 PM",
 };

@@ -30,7 +30,7 @@ const Hero = ({ heroImages, currentSlide }) => {
       <div className="hero-content container">
         <div className="hero-info" data-aos="fade-up">
           <h1>
-            Hamburguesas
+            Al gusto de
             <br />
             <span className="highlight">Ma'Anto</span>
           </h1>

@@ -13,7 +13,13 @@ import Footer from "./components/Footer";
 import CartModal from "./components/CartModal";
 import CustomizationModal from "./components/CustomizationModal";
 import CheckoutModal from "./components/CheckoutModal";
-import { heroImages, menuData, adicionesData, info } from "./data/menu";
+import {
+  heroImages,
+  menuData,
+  adicionesData,
+  allMenuData,
+  info,
+} from "./data/menu";
 
 const App = () => {
   // States
@@ -46,7 +52,7 @@ const App = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
+    }, 1700);
     return () => clearInterval(timer);
   }, []);
 
@@ -208,7 +214,7 @@ const App = () => {
       <Hero heroImages={heroImages} currentSlide={currentSlide} />
 
       <Menu
-        data={menuData}
+        data={allMenuData}
         selectedProduct={selectedProduct}
         setSelectedProduct={setSelectedProduct}
         addToCart={addToCart}

@@ -1,6 +1,17 @@
+import { useState } from "react";
 import MenuCard from "./MenuCard";
 
 const Menu = ({ data, selectedProduct, setSelectedProduct, addToCart }) => {
+  const [activeCategory, setActiveCategory] = useState("hamburguesas");
+
+  const categories = [
+    { id: "hamburguesas", label: "HAMBURGUESAS" },
+    { id: "adiciones", label: "ADICIONES" },
+    { id: "bebidas", label: "BEBIDAS" },
+  ];
+
+  const filteredData = data.filter((item) => item.category === activeCategory);
+
   return (
     <section id="menu" className="menu-section">
       <div className="container">
@@ -9,11 +20,22 @@ const Menu = ({ data, selectedProduct, setSelectedProduct, addToCart }) => {
           <p className="slogan">
             Seleccionamos los mejores ingredientes para ti
           </p>
-          <p className="category-title">HAMBURGUESAS</p>
+        </div>
+
+        <div className="category-filter" data-aos="fade-up">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              className={`filter-btn ${activeCategory === cat.id ? "active" : ""}`}
+              onClick={() => setActiveCategory(cat.id)}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
 
         <div className="menu-grid">
-          {data.map((product) => (
+          {filteredData.map((product) => (
             <MenuCard
               key={product.id}
               product={product}
