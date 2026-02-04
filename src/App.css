@@ -1003,8 +1003,8 @@ body {
 
 .btn-back {
   width: 100%;
-  background: var(--gray);
-  color: white;
+  background: #eee;
+  color: var(--dark);
   border: none;
   padding: 10px;
   border-radius: 18px;
@@ -1021,8 +1021,50 @@ body {
 }
 
 .btn-back:hover {
-  transform: translateY(-5px);
-  box-shadow: 3px 3px 9px var(--shadow-red);
+  background: #ddd;
+  transform: translateY(-2px);
+}
+
+.item-actions-extra {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.edit-btn,
+.remove-btn {
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.edit-btn {
+  background: rgba(250, 190, 18, 0.1);
+  color: var(--secondary);
+}
+
+.edit-btn:hover {
+  background: var(--secondary);
+  color: var(--dark);
+  transform: scale(1.1);
+}
+
+.remove-btn {
+  background: rgba(255, 77, 0, 0.1);
+  color: var(--primary);
+}
+
+.remove-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: scale(1.1);
 }
 
 .btn-checkout {
@@ -1252,11 +1294,49 @@ body {
 }
 
 .footer {
-  padding: 40px 0;
-  text-align: center;
+  padding: 30px 0;
   background: #111;
   color: var(--gray);
   font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 30px; /* Vertical gap 10px, Horizontal gap 30px */
+}
+
+.developer-tag {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin: 0; /* Clear previous margin */
+}
+
+.footer-content p {
+  margin: 0;
+}
+
+.developer-tag a {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.developer-tag a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 .whatsapp-float {
@@ -1382,7 +1462,7 @@ body {
 
 .custom-modal-content {
   background: white;
-  width: 100%;
+  width: 95%;
   max-width: 600px;
   max-height: 90vh;
   border-radius: 30px;
@@ -1619,19 +1699,23 @@ body {
   z-index: 9999 !important;
 }
 
-/* Checkout Modal Styles */
 .checkout-modal-content {
   background: white;
-  width: 100%;
-  max-width: 500px;
+  width: 95%; /* More width on mobile, max-width will still apply on desktop */
+  max-width: 600px;
+  max-height: 90vh;
   border-radius: 30px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .checkout-form {
   padding: 30px;
+  overflow-y: auto; /* Allow scrolling if form is tall */
+  flex-grow: 1;
 }
 
 .form-group {
@@ -1652,12 +1736,13 @@ body {
 .form-group input,
 .form-group textarea,
 .form-group select {
-  padding: 12px 15px;
+  padding: 14px 15px; /* Slightly taller for easier tapping */
   border-radius: 12px;
   border: 2px solid #f0f0f0;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 16px; /* Prevent iOS zoom on focus */
   transition: border-color 0.2s;
+  background-color: #fff;
 }
 
 .form-group input:focus {
@@ -1702,6 +1787,123 @@ body {
   background: rgb(196, 30, 0);
   transform: translateY(-3px);
   box-shadow: 5px 5px 10px rgba(105, 105, 105, 0.842);
+}
+
+/* Order Summary Step Styles */
+.step-indicator {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 5px;
+}
+
+.order-summary-step {
+  padding: 30px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.summary-section {
+  margin-bottom: 25px;
+}
+
+.summary-section h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-left: 4px solid var(--primary);
+  padding-left: 10px;
+}
+
+.summary-card {
+  background: #fdfaf7;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #eee;
+}
+
+.delivery-info p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.delivery-info p:last-child {
+  margin-bottom: 0;
+}
+
+.delivery-info strong {
+  color: var(--dark);
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.order-items-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #444;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #ddd;
+}
+
+.summary-item:last-of-type {
+  border-bottom: none;
+}
+
+.summary-item .qty {
+  font-weight: 800;
+  color: var(--primary);
+  margin-right: 10px;
+}
+
+.summary-item .name {
+  flex-grow: 1;
+}
+
+.summary-item .price {
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.summary-total {
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 2px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-total span:first-child {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--dark);
+}
+
+.summary-total span:last-child {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.final-confirm {
+  background: #25d366 !important; /* WhatsApp Green */
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3) !important;
+}
+
+.final-confirm:hover {
+  background: #128c7e !important;
 }
 
 /* Responsive */
@@ -1771,6 +1973,58 @@ body {
   .btn-map {
     width: 100%;
     justify-content: center;
+  }
+
+  /* Checkout Responsive */
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 10px; /* Added small gap between stacked elements */
+  }
+
+  .checkout-form {
+    padding: 15px 20px; /* Reduced padding */
+  }
+
+  .checkout-modal-content {
+    max-height: 95vh;
+    border-radius: 20px; /* Slightly smaller radius for mobile */
+  }
+
+  .form-group {
+    margin-bottom: 15px; /* Tighter spacing */
+  }
+
+  .checkout-footer {
+    flex-direction: column-reverse; /* Stack buttons on mobile */
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+
+  .checkout-footer button {
+    width: 100%;
+  }
+
+  .order-summary-step {
+    padding: 15px 20px;
+  }
+
+  .custom-modal-content,
+  .checkout-modal-content {
+    width: 95%;
+    max-height: 92vh;
+  }
+
+  /* Fix for Customization Modal on small screens */
+  .custom-modal-body {
+    padding: 15px 20px;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr; /* Stack options for better readability on small mobile */
+  }
+
+  .custom-modal-footer {
+    padding: 10px 20px;
   }
 }
 

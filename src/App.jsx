@@ -25,6 +25,7 @@ const App = () => {
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [productToCustomize, setProductToCustomize] = useState(null);
+  const [editingItemKey, setEditingItemKey] = useState(null);
 
   // Constants
   const whatsappNumber = info.phone;
@@ -56,7 +57,15 @@ const App = () => {
   // Handlers
   const addToCart = (product) => {
     setProductToCustomize(product);
+    setEditingItemKey(null);
     setIsCustomizing(true);
+  };
+
+  const editCartItem = (item) => {
+    setProductToCustomize(item);
+    setEditingItemKey(item.customizationKey);
+    setIsCustomizing(true);
+    setIsCartOpen(false);
   };
 
   const confirmCustomization = (product, customizations) => {
@@ -69,28 +78,37 @@ const App = () => {
         option: customizations.option,
       });
 
-      const existingItem = prevCart.find(
+      // If we are editing, we first remove the old version
+      let newCart = [...prevCart];
+      if (editingItemKey) {
+        newCart = newCart.filter(
+          (item) => item.customizationKey !== editingItemKey,
+        );
+      }
+
+      const existingItem = newCart.find(
         (item) => item.customizationKey === customizationKey,
       );
 
       if (existingItem) {
-        return prevCart.map((item) =>
+        return newCart.map((item) =>
           item.customizationKey === customizationKey
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + (product.quantity || 1) }
             : item,
         );
       }
 
       return [
-        ...prevCart,
+        ...newCart,
         {
           ...product,
-          quantity: 1,
+          quantity: product.quantity || 1,
           customizations,
           customizationKey,
         },
       ];
     });
+    setEditingItemKey(null);
   };
 
   const removeItemByStoreKey = (storeKey) => {
@@ -166,8 +184,9 @@ const App = () => {
     );
 
     Swal.fire({
-      title: "¡Pedido Enviado!",
-      text: "Tu pedido ha sido enviado a WhatsApp. Por favor, estar pendiente del chat.",
+      title: " ¡Pedido Enviado!",
+      text: "Tu pedido ha sido enviado correctamente a WhatsApp.",
+      // Por favor, permanece atento al chat para la confirmación.",
       icon: "success",
       confirmButtonColor: "var(--primary)",
     });
@@ -205,6 +224,7 @@ const App = () => {
         onClose={() => setIsCartOpen(false)}
         onUpdateQuantity={updateQuantity}
         onRemove={removeItemByStoreKey}
+        onEdit={editCartItem}
         onCheckout={() => {
           setIsCartOpen(false);
           setIsCheckoutOpen(true);
@@ -223,6 +243,7 @@ const App = () => {
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
         onConfirm={sendOrderToWhatsApp}
+        cart={cart}
       />
 
       {scrolled && (

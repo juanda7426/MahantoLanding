@@ -4,6 +4,7 @@ const CartModal = ({
   onClose,
   onUpdateQuantity,
   onRemove,
+  onEdit,
   onCheckout,
 }) => {
   if (!isOpen) return null;
@@ -43,7 +44,18 @@ const CartModal = ({
           <div className="empty-cart">
             <i className="fas fa-shopping-basket"></i>
             <p>Tu carrito está vacío</p>
-            <button className="cart-btn" onClick={onClose}>
+            <button
+              className="cart-btn"
+              onClick={() => {
+                onClose();
+                setTimeout(() => {
+                  const menuSection = document.getElementById("menu");
+                  if (menuSection) {
+                    menuSection.scrollIntoView({ behavior: "smooth" });
+                  }
+                }, 100);
+              }}
+            >
               Ver Menú
             </button>
           </div>
@@ -103,12 +115,22 @@ const CartModal = ({
                     >
                       <i className="fas fa-plus"></i>
                     </button>
-                    <button
-                      onClick={() => onRemove(item.customizationKey)}
-                      className="remove-btn"
-                    >
-                      <i className="fas fa-trash"></i>
-                    </button>
+                    <div className="item-actions-extra">
+                      <button
+                        onClick={() => onEdit(item)}
+                        className="edit-btn"
+                        title="Editar preparación"
+                      >
+                        <i className="fas fa-pencil-alt"></i>
+                      </button>
+                      <button
+                        onClick={() => onRemove(item.customizationKey)}
+                        className="remove-btn"
+                        title="Eliminar"
+                      >
+                        <i className="fas fa-trash"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -121,7 +143,7 @@ const CartModal = ({
                   ${(calculateTotal() / 1000).toLocaleString()} K
                 </span>
               </div>
-              <button className="btn-back" onClick={onCheckout}>
+              <button className="btn-back" onClick={onClose}>
                 <i className="fas fa-hand-point-left"></i> Seguir Comprando
               </button>
               <button className="btn-checkout" onClick={onCheckout}>

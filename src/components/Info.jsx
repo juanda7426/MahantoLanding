@@ -41,7 +41,7 @@ const Info = ({ info }) => {
                 <span>Lunes:</span> Cerrado
               </li>
               <li>
-                <span>Martes - Domingos:</span> 17:00 PM - 22:00 PM
+                <span>Martes - Domingo:</span> 17:00 PM - 22:00 PM
               </li>
             </ul>
           </div>

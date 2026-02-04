@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { salsasOptions } from "../data/menu";
 
@@ -13,6 +13,25 @@ const CustomizationModal = ({
   const [selectedSalsas, setSelectedSalsas] = useState(["Todo"]);
   const [observaciones, setObservaciones] = useState("");
   const [productOption, setProductOption] = useState("");
+
+  // Update state when modal opens or product changes (especially for editing)
+  useEffect(() => {
+    if (isOpen && product) {
+      if (product.customizations) {
+        // We are editing
+        setSelectedAdiciones(product.customizations.adiciones || []);
+        setSelectedSalsas(product.customizations.salsas || ["Todo"]);
+        setObservaciones(product.customizations.observaciones || "");
+        setProductOption(product.customizations.option || "");
+      } else {
+        // New item
+        setSelectedAdiciones([]);
+        setSelectedSalsas(["Todo"]);
+        setObservaciones("");
+        setProductOption("");
+      }
+    }
+  }, [isOpen, product]);
 
   if (!isOpen || !product) return null;
 
@@ -153,7 +172,7 @@ const CustomizationModal = ({
             Cancelar
           </button>
           <button className="btn-confirm-add" onClick={handleConfirm}>
-            Agregar al Carrito
+            {product.customizations ? "Guardar Cambios" : "Agregar al Carrito"}
           </button>
         </div>
       </div>
