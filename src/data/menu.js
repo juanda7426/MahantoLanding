@@ -195,7 +195,7 @@ export const info = {
   instagram: "https://www.instagram.com/algustodemaanto/",
   facebook: "https://www.facebook.com/bryan.alexis.garcia.839367",
   tiktok: "https://www.tiktok.com/@algustodemaanto",
-  phone: "573207643590",
+  phone: "573226933654",
   closed: "Lunes",
   day1: "Domingo a Jueves",
   day2: "Viernes y Sábado",
